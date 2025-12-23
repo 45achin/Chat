@@ -1,7 +1,8 @@
 import User from "../model/userModel.js";
 import { tokenGeneration } from "../lib/token.js";
-
+import cloudinary from "../lib/cloudinary.js";
 import bcrypt from "bcryptjs";
+
 export const signup=async(req, res)=>{ 
    const{email,username,password}=req.body; 
    try{
@@ -79,5 +80,20 @@ export const logout=(req,res)=>{
 }
 
 export const updateProfile=async(req,res)=>{ 
-    
-}
+   
+    try{ 
+        const {profilepic}=req.body;
+        const userId=req.user._id;
+
+        if(!profilepic){ 
+            return res.status(400).json()({message:"profilepic is required"});
+        }
+    const uploadImage=await cloudinary.uploader.upload(profilepic);
+    const updateUser=await User.findByIdAndUpdate(userId,{profilepic:uploadImage.secure_url},{new:true}); 
+    res.status(200).json(updateUser);
+    } 
+    catch(error){ 
+      res.status(500).json({message:"Error in updating profile",error :error.message});       
+     }
+
+} 
