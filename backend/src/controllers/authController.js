@@ -54,11 +54,7 @@ export const login=async(req,res)=>{
             res.status(400).json({message:"Incorrect password"})
     }
     tokenGeneration(user._id,res);
-    res.status(200).json({
-        _id:user._id, 
-        username:user.username,
-        email:user.email
-    }); 
+    res.status(200).json(user); 
 }
     catch(error){ 
       console.log("Error in login controller",error.message);

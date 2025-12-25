@@ -4,13 +4,17 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import messageRoute from "./routes/messageRoute.js";
-
+import cors from "cors";
 
 dotenv.config();
 
 
 const app=express(); 
 app.use(express.json());
+app.use(cors({ 
+    origin:"http://localhost:5173",
+    credentials:true,
+}))
 const port=process.env.PORT ;
 app.use(cookieParser());
 

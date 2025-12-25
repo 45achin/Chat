@@ -12,7 +12,7 @@ route.post("/signup",signup);
 
 route.post("/login",login);
 
-route.post("/logout",logout); 
+route.get("/logout",logout); 
 
 route.post("/update-profile",checkAuth,updateProfile);
 
