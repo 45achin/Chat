@@ -19,7 +19,7 @@ const port=process.env.PORT ;
 app.use(cookieParser());
 
 app.use("/api/auth",authRoute);
-app.use('/api/auth/message',messageRoute);
+app.use("/api/message",messageRoute);
 
 mongoose.connect(process.env.MONGODB_URI).then((res)=>{ 
     console.log("Connected to database"+res.connection.host);
