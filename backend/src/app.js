@@ -5,11 +5,13 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import messageRoute from "./routes/messageRoute.js";
 import cors from "cors";
+import{app,server} from "./lib/socket.js";
+
 
 dotenv.config();
 
 
-const app=express(); 
+
 app.use(express.json());
 app.use(cors({ 
     origin:"http://localhost:5173",
@@ -24,7 +26,7 @@ app.use("/api/message",messageRoute);
 mongoose.connect(process.env.MONGODB_URI).then((res)=>{ 
     console.log("Connected to database"+res.connection.host);
 
-    app.listen(port,()=>{ 
+    server.listen(port,()=>{ 
     console.log(`Server running on port ${port}`);
 })
 
