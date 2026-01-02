@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import messageRoute from "./routes/messageRoute.js";
 import cors from "cors";
 import{app,server} from "./lib/socket.js";
+import bodyParser from "body-parser";
 
 
 dotenv.config();
@@ -13,6 +14,8 @@ dotenv.config();
 
 
 app.use(express.json());
+app.use(bodyParser.json({ limit: "10MB" }));
+app.use(bodyParser.urlencoded({ limit: "10MB", extended: true }));
 app.use(cors({ 
     origin:"http://localhost:5173",
     credentials:true,
